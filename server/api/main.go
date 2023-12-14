@@ -20,14 +20,31 @@ type ReturnValues struct {
 }
 
 func main() {
-	http.HandleFunc("/diagonal", exercises.Diagonal)
+	http.HandleFunc("/diagonal", diagonalHandler)
 	http.HandleFunc("/buddystring", exercises.BuddyString)
 	// Default handler expects word list for trie
-	http.HandleFunc("/", handler)
+	http.HandleFunc("/", defaultHandler)
 	http.ListenAndServe(":8080", nil)
 }
 
-func handler(w http.ResponseWriter, r *http.Request) {
+func diagonalHandler(w http.ResponseWriter, r *http.Request) {
+	var inputArray exercises.TwoDArray
+	err := json.NewDecoder(r.Body).Decode(&inputArray)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+	err = json.NewDecoder(r.Body).Decode(&inputArray)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+	output := exercises.Diagonal(inputArray)
+	res, _ := json.Marshal(output)
+	w.Write(res)
+}
+
+func defaultHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Add("Connection", "keep-alive")
 	w.Header().Add("Access-Control-Allow-Origin", "http://localhost:3000")
 	w.Header().Add("Access-Control-Allow-Methods", "POST, OPTIONS, GET")

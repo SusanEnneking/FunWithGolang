@@ -1,27 +1,19 @@
 package exercises
 
 import (
-	"encoding/json"
-	"fmt"
-	"net/http"
 	"sync"
 )
 
 // this is a horrible solution to the problem, but it allows me to use go routines!
+// the question goes something like this:  Given a 2-d array return a 1d array with containing all of the diagonals in order
+// see test for expected input/output combos
 
-type twoDArray struct {
+type TwoDArray struct {
 	Td [][]int
 }
 
 var wg = &sync.WaitGroup{} //pointer to wait group
-func Diagonal(w http.ResponseWriter, r *http.Request) {
-	var inputArray twoDArray
-	fmt.Sprintln("body", r.Body)
-	err := json.NewDecoder(r.Body).Decode(&inputArray)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
-	}
+func Diagonal(inputArray TwoDArray) []int {
 
 	c1 := make(chan []int, 1)
 	c2 := make(chan []int, 2)
@@ -38,7 +30,7 @@ func Diagonal(w http.ResponseWriter, r *http.Request) {
 	wg.Wait()
 	output := <-c1
 	output = append(output, <-c2...)
-	fmt.Print(output)
+	return output
 }
 
 func getDiagonalsStartingInCol0(nums [][]int, out chan<- []int) {

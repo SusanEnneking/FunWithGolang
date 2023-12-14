@@ -1,9 +1,7 @@
 package exercises
 
 import (
-	"encoding/json"
 	"fmt"
-	"net/http"
 )
 
 type Buddies struct {
@@ -11,20 +9,9 @@ type Buddies struct {
 	Goal string
 }
 
-func BuddyString(w http.ResponseWriter, r *http.Request) {
-	var buddies Buddies
-	fmt.Println("body", r.Body)
-	err := json.NewDecoder(r.Body).Decode(&buddies)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
-	}
-	fmt.Println(buddyCheck(buddies.S, buddies.Goal))
-}
-
-func buddyCheck(s string, goal string) bool {
-	lenS := len(s)
-	lenGoal := len(goal)
+func BuddyCheck(buddies Buddies) bool {
+	lenS := len(buddies.S)
+	lenGoal := len(buddies.Goal)
 	if lenS != lenGoal || lenS == 1 {
 		return false
 	}
@@ -34,17 +21,17 @@ func buddyCheck(s string, goal string) bool {
 	}
 	// if any two letters are the same, they could be switched to come up with the same string
 	// otherwise no
-	if s == goal {
+	if buddies.S == buddies.Goal {
 		dups := []byte{}
-		for index := range s {
+		for index := range buddies.S {
 			alreadyThere := false
 			for dupsIndex := range dups {
-				if dups[dupsIndex] == s[index] {
+				if dups[dupsIndex] == buddies.S[index] {
 					alreadyThere = true
 				}
 			}
 			if !alreadyThere {
-				dups = append(dups, s[index])
+				dups = append(dups, buddies.S[index])
 			} else {
 				return true
 			}
@@ -54,8 +41,8 @@ func buddyCheck(s string, goal string) bool {
 	}
 
 	first, second := -1, -1
-	for index := range s {
-		if s[index] != goal[index] {
+	for index := range buddies.S {
+		if buddies.S[index] != buddies.Goal[index] {
 			if first == -1 {
 				first = index
 			} else if second == -1 {
@@ -71,6 +58,6 @@ func buddyCheck(s string, goal string) bool {
 	}
 
 	fmt.Println(first, second)
-	fmt.Println(s[first], goal[first], s[second], goal[second])
-	return s[first] == goal[second] && s[second] == goal[first]
+	fmt.Println(buddies.S[first], buddies.Goal[first], buddies.S[second], buddies.Goal[second])
+	return buddies.S[first] == buddies.Goal[second] && buddies.S[second] == buddies.Goal[first]
 }

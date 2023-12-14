@@ -21,7 +21,7 @@ type ReturnValues struct {
 
 func main() {
 	http.HandleFunc("/diagonal", diagonalHandler)
-	http.HandleFunc("/buddystring", exercises.BuddyString)
+	http.HandleFunc("/buddystring", buddyStringHandler)
 	// Default handler expects word list for trie
 	http.HandleFunc("/", defaultHandler)
 	http.ListenAndServe(":8080", nil)
@@ -40,6 +40,18 @@ func diagonalHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	output := exercises.Diagonal(inputArray)
+	res, _ := json.Marshal(output)
+	w.Write(res)
+}
+
+func buddyStringHandler(w http.ResponseWriter, r *http.Request) {
+	var buddies exercises.Buddies
+	err := json.NewDecoder(r.Body).Decode(&buddies)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+	output := exercises.BuddyCheck(buddies)
 	res, _ := json.Marshal(output)
 	w.Write(res)
 }

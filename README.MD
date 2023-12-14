@@ -1,10 +1,10 @@
 # PlayWithGo (and Next.js) #
 
-## An algorithm a day keeps the hubris away.  But, if you keep it to < 1/week you really aren't a geek.##
+An algorithm a day keeps the hubris away.  But, if you keep it to < 1/week you really aren't a geek.
 
 ## A place to practice with GoLang and Next.js ##
 
-Trying to build skills with go and Next.js by doing a few on-line tutorials and alogorithms using Next.js and/or Golang
+Building skills with go and Next.js by doing a few on-line code/algorithm challenges Next.js and/or Golang
 
 ## Main components: ##
 

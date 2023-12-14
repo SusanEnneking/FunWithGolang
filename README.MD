@@ -12,16 +12,16 @@ Building skills with go and Next.js by doing a few on-line code/algorithm challe
 
 2. Server - Golang http server.  Just a way to invoke the code via Postman/Next.js.  Probably sould just add more tests, but then how would I dream up a need for a client.
 
-##To Use##
+## To Use ##
 Start Server:
 1.  Navigate to server/main.go
-2.  go run main.go
+2.  ```go run main.go```
     --OR--
     User vsCode and choose Run, Start Debuggin from the menu.  You have to be editing main.go for this to work.
-    
+
 Start Client:
 1.  Navigate to client/nextjs-trystuff
-2.  npm run dev
+2.  ```npm run dev```
 3.  navigate to http://localhost:3000
 
 

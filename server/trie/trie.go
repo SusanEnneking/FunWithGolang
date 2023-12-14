@@ -86,21 +86,20 @@ func (t *Trie) GetWordsThatStartWith(prefix string) []string {
 			break
 		}
 		// save working root/prefix for local use and "pop" it off your poor woman's stack
-		myCurr := stack[len(stack)-1].Node
-		myPre := stack[len(stack)-1].Prefix
+		currentStackEntry := stack[len(stack)-1]
 		stack = stack[:len(stack)-1]
-		if myCurr.wordEnds {
-			words = append(words, myPre)
+		if currentStackEntry.Node.wordEnds {
+			words = append(words, currentStackEntry.Prefix)
 		}
 		for _, wr := range alphabet {
 			index := wr - 'a'
-			if myCurr.childrens[index] == nil {
+			if currentStackEntry.Node.childrens[index] == nil {
 				continue
 			}
 			// push this root and associated prefix for later processing
 			stack = append(stack, StackEntry{
-				Node:   myCurr.childrens[index],
-				Prefix: myPre + string(alphabet[index]),
+				Node:   currentStackEntry.Node.childrens[index],
+				Prefix: currentStackEntry.Prefix + string(alphabet[index]),
 			})
 		}
 	}

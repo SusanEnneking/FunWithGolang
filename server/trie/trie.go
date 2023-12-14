@@ -39,20 +39,17 @@ func (t *Trie) Insert(word string) {
 }
 
 // Initializing the search for word in node
-func (t *Trie) Search(word string) int {
+func (t *Trie) Search(word string) bool {
 	current := t.root
 	word = strings.Trim(strings.ToLower(word), " ")
 	for _, wr := range word {
 		index := wr - 'a'
 		if current.childrens[index] == nil {
-			return 0
+			return false
 		}
 		current = current.childrens[index]
 	}
-	if current.wordEnds {
-		return 1
-	}
-	return 0
+	return current.wordEnds
 }
 
 // Get words that start with prefix

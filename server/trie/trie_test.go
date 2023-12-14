@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func TestTrie(t *testing.T) {
+func TestTrieWordsThatStartWith(t *testing.T) {
 	wordList := []string{"apple", "ant", "ape", "cat", "car", "cart", "curtsy", "dog", "dainty", "dart"}
 	testTrie := TrieData()
 	for _, word := range wordList {
@@ -60,4 +60,37 @@ func checkWordsAreInOriginalList(prefix string, words []string, originalList []s
 			t.Error(fmt.Printf("Some returned words are not in original List for prefix: %s.", prefix))
 		}
 	}
+}
+
+func TestTrieStartsWith(t *testing.T) {
+	wordList := []string{"apple", "ant", "ape", "cat", "car", "cart", "curtsy", "dog", "dainty", "dart"}
+	testTrie := TrieData()
+	for _, word := range wordList {
+		testTrie.Insert(word)
+	}
+	prefix := "ap"
+	matchingWords := testTrie.GetWordsThatStartWith(prefix)
+	if len(matchingWords) != 2 {
+		t.Error(fmt.Printf("Expected 2 for prefix: %s, but got %d.", prefix, len(matchingWords)))
+	}
+	checkWordsAreInOriginalList(prefix, matchingWords, wordList, t)
+}
+
+func TestSearch(t *testing.T) {
+	wordList := []string{"apple", "ant", "ape", "cat", "car", "cart", "curtsy", "dog", "dainty", "dart"}
+	testTrie := TrieData()
+	for _, word := range wordList {
+		testTrie.Insert(word)
+	}
+	word := "curtsy"
+	matchingWords := testTrie.Search(word)
+	if !matchingWords {
+		t.Error(fmt.Printf("Expected true for: %s, but got %t.", word, matchingWords))
+	}
+	word = "elephant"
+	matchingWords = testTrie.Search(word)
+	if matchingWords {
+		t.Error(fmt.Printf("Expected false for prefix: %s, but got %t.", word, matchingWords))
+	}
+
 }

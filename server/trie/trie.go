@@ -85,7 +85,7 @@ func (t *Trie) GetWordsThatStartWith(prefix string) []string {
 		if len(stack) == 0 {
 			break
 		}
-		// save working root/prefix and "pop" it off your poor woman's stack
+		// save working root/prefix for local use and "pop" it off your poor woman's stack
 		myCurr := stack[len(stack)-1].Node
 		myPre := stack[len(stack)-1].Prefix
 		stack = stack[:len(stack)-1]
@@ -105,4 +105,19 @@ func (t *Trie) GetWordsThatStartWith(prefix string) []string {
 		}
 	}
 	return words
+}
+
+// Do any words start with this prefix
+func (t *Trie) StartsWith(prefix string) bool {
+	current := t.root
+	prefix = strings.Trim(strings.ToLower(prefix), " ")
+	for _, wr := range prefix {
+		index := wr - 'a'
+		if current.childrens[index] == nil {
+			// no words start with this prefix
+			return false
+		}
+		current = current.childrens[index]
+	}
+	return true
 }

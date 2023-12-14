@@ -69,11 +69,15 @@ func TestTrieStartsWith(t *testing.T) {
 		testTrie.Insert(word)
 	}
 	prefix := "ap"
-	matchingWords := testTrie.GetWordsThatStartWith(prefix)
-	if len(matchingWords) != 2 {
-		t.Error(fmt.Printf("Expected 2 for prefix: %s, but got %d.", prefix, len(matchingWords)))
+	matchingWords := testTrie.StartsWith(prefix)
+	if !matchingWords {
+		t.Error(fmt.Printf("Expected true for prefix: %s, but got %t.", prefix, matchingWords))
 	}
-	checkWordsAreInOriginalList(prefix, matchingWords, wordList, t)
+	prefix = "apa"
+	matchingWords = testTrie.StartsWith(prefix)
+	if matchingWords {
+		t.Error(fmt.Printf("Expected false for prefix: %s, but got %t.", prefix, matchingWords))
+	}
 }
 
 func TestSearch(t *testing.T) {

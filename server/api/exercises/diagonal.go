@@ -5,7 +5,7 @@ import (
 )
 
 // this is a horrible solution to the problem, but it allows me to use go routines!
-// the question goes something like this:  Given a 2-d array return a 1d array with containing all of the diagonals in order
+// the question goes something like this:  Given a 2-d array return a 1d array containing all of the diagonals in order
 // see test for expected input/output combos
 
 type TwoDArray struct {

@@ -7,7 +7,7 @@ import (
 // Declaring trie_Node  for creating node in a trie
 type trie_Node struct {
 	//assigning limit of 26 for child nodes
-	childrens [26]*trie_Node
+	children [26]*trie_Node
 	//declaring a bool variable to check the word end.
 	wordEnds bool
 }
@@ -30,10 +30,10 @@ func (t *Trie) Insert(word string) {
 	word = strings.Trim(strings.ToLower(word), " ")
 	for _, wr := range word {
 		index := wr - 'a'
-		if current.childrens[index] == nil {
-			current.childrens[index] = new(trie_Node)
+		if current.children[index] == nil {
+			current.children[index] = new(trie_Node)
 		}
-		current = current.childrens[index]
+		current = current.children[index]
 	}
 	current.wordEnds = true
 }
@@ -44,10 +44,10 @@ func (t *Trie) Search(word string) bool {
 	word = strings.Trim(strings.ToLower(word), " ")
 	for _, wr := range word {
 		index := wr - 'a'
-		if current.childrens[index] == nil {
+		if current.children[index] == nil {
 			return false
 		}
-		current = current.childrens[index]
+		current = current.children[index]
 	}
 	return current.wordEnds
 }
@@ -60,11 +60,11 @@ func (t *Trie) GetWordsThatStartWith(prefix string) []string {
 	prefix = strings.Trim(strings.ToLower(prefix), " ")
 	for _, wr := range prefix {
 		index := wr - 'a'
-		if current.childrens[index] == nil {
+		if current.children[index] == nil {
 			// no words start with this prefix
 			return words
 		}
-		current = current.childrens[index]
+		current = current.children[index]
 	}
 	// Not sure if it's uncool to put the type in this function, but it's not used
 	// anywhere else so, seems like an ok thing to do
@@ -93,12 +93,12 @@ func (t *Trie) GetWordsThatStartWith(prefix string) []string {
 		}
 		for _, wr := range alphabet {
 			index := wr - 'a'
-			if currentStackEntry.Node.childrens[index] == nil {
+			if currentStackEntry.Node.children[index] == nil {
 				continue
 			}
 			// push this root and associated prefix for later processing
 			stack = append(stack, StackEntry{
-				Node:   currentStackEntry.Node.childrens[index],
+				Node:   currentStackEntry.Node.children[index],
 				Prefix: currentStackEntry.Prefix + string(alphabet[index]),
 			})
 		}
@@ -112,11 +112,11 @@ func (t *Trie) StartsWith(prefix string) bool {
 	prefix = strings.Trim(strings.ToLower(prefix), " ")
 	for _, wr := range prefix {
 		index := wr - 'a'
-		if current.childrens[index] == nil {
+		if current.children[index] == nil {
 			// no words start with this prefix
 			return false
 		}
-		current = current.childrens[index]
+		current = current.children[index]
 	}
 	return true
 }

@@ -34,11 +34,6 @@ func diagonalHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	err = json.NewDecoder(r.Body).Decode(&inputArray)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
-	}
 	output := exercises.Diagonal(inputArray)
 	res, _ := json.Marshal(output)
 	w.Write(res)
@@ -77,19 +72,14 @@ func getMatchingWordList(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	t := buildTrie(wordInfo.Words)
+	t := trie.TrieData()
+	for _, word := range wordInfo.Words {
+		t.Insert(word)
+	}
 	answer := t.GetWordsThatStartWith(wordInfo.Prefix)
 	json.NewEncoder(w).Encode(ReturnValues{
 		Errcode: 0,
 		Message: "OK",
 		Data:    answer,
 	})
-}
-
-func buildTrie(wordList []string) trie.Trie {
-	t := trie.TrieData()
-	for _, word := range wordList {
-		t.Insert(word)
-	}
-	return *t
 }

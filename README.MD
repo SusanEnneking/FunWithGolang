@@ -25,5 +25,8 @@ Building skills with go and Next.js by doing a few on-line code/algorithm challe
 3.  navigate to http://localhost:3000
 
 ## Testing ##
+### Server ###
+Navigate to server and run the following commands
 ```make test``` runs all test\
 ```make test_coverage``` shows test coverage
+### Client ###

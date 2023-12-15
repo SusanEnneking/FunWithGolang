@@ -24,6 +24,6 @@ Building skills with go and Next.js by doing a few on-line code/algorithm challe
 2.  ```npm run dev```
 3.  navigate to http://localhost:3000
 
-### Testing:
+## Testing ##
 ```make test``` runs all test\
 ```make test_coverage``` shows test coverage

@@ -51,7 +51,7 @@ export default function Trie() {
                 
             <FormControl>
                 <InputLabel htmlFor="wordlist"></InputLabel>
-                <TextField type="text" id="wordlist" name="wordlist" variant="outlined"
+                <TextField data-testid="wordlist" type="text" id="wordlist" name="wordlist" variant="outlined"
                         value={wordString}
                         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                           setWordString(event.target.value);
@@ -61,14 +61,14 @@ export default function Trie() {
             </FormControl>
             <FormControl>    
                 <InputLabel htmlFor="prefix"></InputLabel>
-                <TextField type="text" id="prefix" name="prefix" variant="outlined"
+                <TextField data-testid="prefix" type="text" id="prefix" name="prefix" variant="outlined"
                         value={prefix}
                         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                             setPrefix(event.target.value);
                         }} placeholder="any prefix string" aria-describedby="prefix-helper-text" />
                 <FormHelperText id="prefix-helper-text">String prefix to filter list</FormHelperText>
                 <Toolbar sx={{ justifyContent: "space-between" }}>
-                    <Button variant="contained" type="submit" onClick={getWords}>Get Matching Words</Button>
+                    <Button data-testid="submit" variant="contained" type="submit" onClick={getWords}>Get Matching Words</Button>
                 </Toolbar>
             </FormControl>
         </FormGroup>
@@ -76,7 +76,7 @@ export default function Trie() {
         <CardHeader
             title="Matching Words"
         />
-            <div style={wordListstyle}>
+            <div data-testid="matching" style={wordListstyle}>
                 {matchingWords.map(paragraph => <p>{paragraph}</p>)}
            </div>
         </Card>

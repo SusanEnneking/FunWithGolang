@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import Page from './play-code/play'
+import Page from './play-code/palendrome'
 import Trie from './play-code/trie'
 import styles from './page.module.css'
 

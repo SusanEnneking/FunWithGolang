@@ -28,6 +28,8 @@ Building skills with go and Next.js by doing a few on-line code/algorithm challe
 ## Testing ##
 ### Server ###
 Navigate to server and run the following commands\
-```make test``` runs all test\
+```make test``` runs all server tests\
 ```make test_coverage``` shows test coverage
 ### Client ###
+[Used this setup advice](https://nextjs.org/docs/app/building-your-application/testing/jest)
+```npm run test``` runs all client tests\

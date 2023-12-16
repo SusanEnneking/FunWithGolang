@@ -1,10 +1,9 @@
 
 import styles from '../page.module.css'
-export default function Play() {
+export default function Palendrome() {
     
 
   const palindrome = (strText: string) => {
-    console.log(`Incoming String: ${strText}`);
     let firstHalf = '';
     let firstHalfArray = [];
     let secondHalf = '';
@@ -17,7 +16,6 @@ export default function Play() {
     firstHalfArray = firstHalf.split('');
     firstHalf = firstHalfArray.reverse().join('');
     secondHalf = strText.substring(centerIndex, strText.length);
-    console.warn(`First: ${firstHalf}, Second: ${secondHalf}`);
     if (firstHalf === secondHalf){
         return strText;
     }
@@ -32,7 +30,6 @@ export default function Play() {
                 let newLongest = palindrome(strText.substring(center - plusMinus, center + plusMinus + 1));
                 if (longest.length < newLongest.length){
                     longest = newLongest;
-                    console.warn(longest);
                 }
             }
         }
@@ -45,7 +42,7 @@ export default function Play() {
     <div>
         <h1>Problem Output</h1>
         <div  className={styles.card}>
-            <p>{output}</p>
+            <p data-testid="palendrome">{output}</p>
         </div>
     </div>
   )

@@ -14,7 +14,7 @@ Building skills with go and Next.js by doing a few on-line code/algorithm challe
 
 ## To Use ##
 ### Start Server:
-1.  Navigate to server/main.go
+1.  Navigate to server/api/main.go
 2.  ```go run main.go```\
     --OR--\
     Use vsCode and choose **Run** , **Start Debugging** from the menu.  You have to be editing **main.go** for this to work.

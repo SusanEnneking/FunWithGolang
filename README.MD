@@ -31,5 +31,5 @@ Navigate to server and run the following commands\
 ```make test``` runs all server tests\
 ```make test_coverage``` shows test coverage
 ### Client ###
-[Used this setup advice](https://nextjs.org/docs/app/building-your-application/testing/jest)
-```npm run test``` runs all client tests\
+[Used this setup advice](https://nextjs.org/docs/app/building-your-application/testing/jest)\
+```npm run test``` runs all client tests

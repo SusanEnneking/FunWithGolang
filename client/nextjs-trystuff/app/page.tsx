@@ -1,14 +1,14 @@
-import Image from 'next/image'
-import Page from './play-code/palendrome'
-import Trie from './play-code/trie'
-import styles from './page.module.css'
+import Image from 'next/image';
+import Palendrome from './play-code/palendrome';
+import Trie from './play-code/trie';
+import styles from './page.module.css';
 
 export default function Home() {
   return (
     
     <main className={styles.main}>
       <div className={styles.top}>
-          <Page />
+          <Palendrome />
           <Trie />
       </div>
       <div className={styles.left}>
